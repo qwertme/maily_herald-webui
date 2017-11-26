@@ -30,6 +30,11 @@ module MailyHerald
         input
       end
 
+      def alias_method_chain(method_name, feature)
+        alias_method "#{method_name}_without_#{feature}", method_name
+        alias_method method_name, "#{method_name}_with_#{feature}"
+      end
+
       FIELD_HELPERS.each do |method_name|
         with_method_name = "#{method_name}_with_maily"
         without_method_name = "#{method_name}_without_maily"
